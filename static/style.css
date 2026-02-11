@@ -1,0 +1,187 @@
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #374151 transparent;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.font-mono {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ── Chat Bubbles ─────────────────────────────────────────────────────────── */
+.msg-user {
+    margin-left: auto;
+    max-width: 75%;
+    background: #1e3a5f;
+    border: 1px solid #2563eb40;
+    border-radius: 12px 12px 4px 12px;
+    padding: 10px 14px;
+    color: #bfdbfe;
+}
+
+.msg-assistant {
+    margin-right: auto;
+    max-width: 75%;
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 12px 12px 12px 4px;
+    padding: 10px 14px;
+    color: #d1d5db;
+}
+
+.msg-blocked {
+    margin-right: auto;
+    max-width: 75%;
+    background: #3b1219;
+    border: 1px solid #dc262640;
+    border-radius: 12px 12px 12px 4px;
+    padding: 10px 14px;
+    color: #fca5a5;
+}
+
+.msg-hint {
+    margin: 0 auto;
+    max-width: 70%;
+    background: #422006;
+    border: 1px solid #d9770640;
+    border-radius: 8px;
+    padding: 8px 14px;
+    color: #fcd34d;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.msg-system {
+    margin: 0 auto;
+    max-width: 70%;
+    color: #6b7280;
+    text-align: center;
+    font-size: 0.75rem;
+    padding: 4px;
+}
+
+/* ── Message Labels ───────────────────────────────────────────────────────── */
+.msg-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+    opacity: 0.7;
+}
+
+/* ── Level List Items ─────────────────────────────────────────────────────── */
+.level-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-size: 0.85rem;
+}
+
+.level-item:hover {
+    background: #1f2937;
+}
+
+.level-item.active {
+    background: #1f2937;
+    border-left: 3px solid #22c55e;
+}
+
+.level-item .level-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    width: 24px;
+    text-align: center;
+}
+
+.level-item .level-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.level-item .level-title {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.level-item .level-diff {
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+/* ── Difficulty Badges ────────────────────────────────────────────────────── */
+.diff-Easy    { background: #064e3b; color: #6ee7b7; }
+.diff-Medium  { background: #78350f; color: #fcd34d; }
+.diff-Hard    { background: #7c2d12; color: #fdba74; }
+.diff-Expert  { background: #4c1d95; color: #c4b5fd; }
+
+/* ── Defense Tags ─────────────────────────────────────────────────────────── */
+.defense-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #1e1b4b;
+    border: 1px solid #4338ca40;
+    color: #a5b4fc;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Victory Animation ────────────────────────────────────────────────────── */
+.victory-flash {
+    animation: victoryPulse 0.5s ease-out;
+}
+
+@keyframes victoryPulse {
+    0% { transform: scale(0.8); opacity: 0; }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Green flash on chat area when secret extracted */
+.chat-victory-flash {
+    animation: greenFlash 1s ease-out;
+}
+
+@keyframes greenFlash {
+    0% { background-color: #22c55e20; }
+    100% { background-color: transparent; }
+}
+
+/* ── Loading Dots ─────────────────────────────────────────────────────────── */
+.loading-dots::after {
+    content: '';
+    animation: dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes dots {
+    0%   { content: ''; }
+    33%  { content: '.'; }
+    66%  { content: '..'; }
+    100% { content: '...'; }
+}
+
+/* ── Textarea ─────────────────────────────────────────────────────────────── */
+#message-input {
+    min-height: 50px;
+    max-height: 200px;
+}
+
+/* ── Blocked Shield Icon ──────────────────────────────────────────────────── */
+.shield-icon::before {
+    content: '\1F6E1';
+    margin-right: 6px;
+}

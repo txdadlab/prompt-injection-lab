@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Injection Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="bg-gray-950 text-gray-100 h-screen flex overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-72 bg-gray-900 border-r border-gray-800 flex flex-col flex-shrink-0">
+        <!-- Header -->
+        <div class="p-4 border-b border-gray-800">
+            <h1 class="text-lg font-bold font-mono text-green-400 flex items-center gap-2">
+                <span class="text-2xl">&#x1f6e1;</span> Prompt Injection Lab
+            </h1>
+            <p class="text-xs text-gray-500 mt-1">Extract the secret from each level</p>
+            <div id="progress-counter" class="text-xs text-gray-400 mt-2 font-mono">0 / 7 solved</div>
+        </div>
+
+        <!-- Level List -->
+        <nav id="level-list" class="flex-1 overflow-y-auto p-2 space-y-1">
+            <!-- Populated by JS -->
+        </nav>
+
+        <!-- Footer -->
+        <div class="p-3 border-t border-gray-800">
+            <button id="btn-reset-all" class="w-full text-xs text-gray-500 hover:text-red-400 transition-colors py-1">
+                Reset All Progress
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col min-w-0">
+        <!-- Level Header -->
+        <header id="level-header" class="p-4 border-b border-gray-800 bg-gray-900/50">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 id="level-name" class="text-xl font-bold font-mono text-white">Select a level</h2>
+                    <p id="level-description" class="text-sm text-gray-400 mt-1 max-w-2xl">Choose a challenge from the sidebar to begin.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span id="level-difficulty" class="hidden px-2 py-0.5 rounded text-xs font-bold"></span>
+                    <span id="level-solved-badge" class="hidden px-2 py-0.5 rounded text-xs font-bold bg-green-500/20 text-green-400">SOLVED</span>
+                </div>
+            </div>
+            <!-- Active Defenses -->
+            <div id="defense-tags" class="flex gap-2 mt-2 flex-wrap"></div>
+        </header>
+
+        <!-- Chat Area -->
+        <div id="chat-area" class="flex-1 overflow-y-auto p-4 space-y-3 font-mono text-sm">
+            <div class="text-center text-gray-600 mt-20">
+                <p class="text-4xl mb-4">&#x1f512;</p>
+                <p>Select a level to begin your injection challenge.</p>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div id="input-area" class="p-4 border-t border-gray-800 bg-gray-900/50 hidden">
+            <div class="flex gap-2 items-end max-w-4xl mx-auto">
+                <div class="flex-1 relative">
+                    <textarea
+                        id="message-input"
+                        rows="2"
+                        class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-sm font-mono text-gray-100 resize-none focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/30 placeholder-gray-600"
+                        placeholder="Type your prompt injection..."
+                    ></textarea>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <button id="btn-send" class="px-4 py-3 bg-green-600 hover:bg-green-500 text-white rounded-lg font-bold text-sm transition-colors">
+                        Send
+                    </button>
+                    <button id="btn-hint" class="px-4 py-1.5 bg-yellow-600/20 hover:bg-yellow-600/30 text-yellow-400 rounded-lg text-xs font-mono transition-colors">
+                        Hint
+                    </button>
+                </div>
+            </div>
+            <div id="attempt-counter" class="text-center text-xs text-gray-600 mt-2 font-mono"></div>
+        </div>
+    </main>
+
+    <!-- Victory Overlay -->
+    <div id="victory-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 items-center justify-center" style="display: none;">
+        <div class="text-center victory-flash">
+            <div class="text-6xl mb-4">&#x1f389;</div>
+            <h2 class="text-3xl font-bold text-green-400 font-mono mb-2">SECRET EXTRACTED!</h2>
+            <p id="victory-secret" class="text-lg text-green-300 font-mono bg-green-500/10 px-6 py-3 rounded-lg border border-green-500/30 mb-4"></p>
+            <p id="victory-attempts" class="text-sm text-gray-400 mb-6"></p>
+            <button id="btn-victory-close" class="px-6 py-2 bg-green-600 hover:bg-green-500 text-white rounded-lg font-bold transition-colors">
+                Continue
+            </button>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
